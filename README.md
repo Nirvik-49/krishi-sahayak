@@ -71,7 +71,7 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-
+```
 
 👥 Team
 Built by [Your Team Name] for Frogtoberfest 2026 (Leapfrog Technology).
