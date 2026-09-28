@@ -36,22 +36,29 @@ In compliance with **Frogtoberfest 2026 Guidelines**:
 
 ## 🏗️ Project Architecture & Tool Calling Flow
 
-[ User Query (Nepali Voice/Text) ]
-│
-▼
-[ KrishiSahayak Agent Core (Llama 3.3 / Qwen 2.5) ]
-│
-┌──────┴──────────────────────────┐
-▼                                 ▼
-[ Tool 1: Weather API ]     [ Tool 2: Kalimati Rates API ]
-│                                 │
-└──────┬──────────────────────────┘
-▼
-[ Multi-Variable Tradeoff Decision Engine ]
-│
-▼
-[ Actionable Output (Nepali Voice/Text) ]
+```mermaid
+graph TD
+    classDef user fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef agent fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+    classDef tools fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+    classDef output fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
 
+    User(["👨‍🌾 User Input<br/><i>Nepali Voice or Text</i>"]):::user --> API["⚡ FastAPI Request Router<br/><i>STT / Whisper Audio Processing</i>"]
+    API --> Core["🧠 KrishiSahayak Agent Core<br/><i>Llama 3.3 / Qwen 2.5</i>"]
+
+    subgraph Tool Calling Execution Layer
+        Core -->|"1. Intent & Entity Extraction"| Tool1["🌤️ Tool 1: OpenWeather API<br/><i>Local Micro-Climate Forecast</i>"]:::tools
+        Core -->|"2. JSON Function Call"| Tool2["📊 Tool 2: Kalimati Market API<br/><i>Wholesale Commodity Rates</i>"]:::tools
+        Core -->|"3. Parameter Lookup"| Tool3["📚 Tool 3: Crop Knowledge Base<br/><i>Perishability & Pest Guidelines</i>"]:::tools
+    end
+
+    Tool1 -->|"Weather Data"| Engine["⚖️ Multi-Variable Tradeoff Engine<br/><i>Rain Risk vs. Price Trajectory</i>"]
+    Tool2 -->|"Market Trends"| Engine
+    Tool3 -->|"Crop Rules"| Engine
+
+    Engine --> Synthesis["🗣️ Natural Language Generator<br/><i>Structured Nepali Text / TTS Audio</i>"]
+    Synthesis --> Output(["📱 Actionable Farmer Output<br/><i>WhatsApp / Web Response</i>"]):::output
+```
 
 ---
 
