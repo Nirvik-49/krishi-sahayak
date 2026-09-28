@@ -32,6 +32,10 @@ In compliance with **Frogtoberfest 2026 Guidelines**:
   * Agricultural Crop & Pesticide Guidelines Engine
 * **Frontend / UI:** Web App (React / Streamlit) & WhatsApp / Telegram Messaging Interface
 
+---
+
+## 🏗️ Project Architecture & Tool Calling Flow
+
 [ User Query (Nepali Voice/Text) ]
 │
 ▼
@@ -78,7 +82,3 @@ Built by [Your Team Name] for Frogtoberfest 2026 (Leapfrog Technology).
 
 📜 License
 Distributed under the MIT License. See LICENSE for more information.
-
----
-
-## 🏗️ Project Architecture & Tool Calling Flow
