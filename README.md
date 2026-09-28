@@ -36,8 +36,6 @@ In compliance with **Frogtoberfest 2026 Guidelines**:
 
 ## 🏗️ Project Architecture & Tool Calling Flow
 
-## 🏗️ Project Architecture & Tool Calling Flow
-
 ```mermaid
 graph TD
     %% Color Palette Definition: Dark Fills + Bright Strokes + Pure White Text
