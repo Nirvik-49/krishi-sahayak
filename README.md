@@ -36,28 +36,47 @@ In compliance with **Frogtoberfest 2026 Guidelines**:
 
 ## 🏗️ Project Architecture & Tool Calling Flow
 
+## 🏗️ Project Architecture & Tool Calling Flow
+
 ```mermaid
 graph TD
-    classDef user fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
-    classDef agent fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
-    classDef tools fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
-    classDef output fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+    %% Color Palette Definition: Dark Fills + Bright Strokes + Pure White Text
+    classDef userStyle fill:#1e3a8a,stroke:#60a5fa,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef gatewayStyle fill:#334155,stroke:#94a3b8,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef coreStyle fill:#581c87,stroke:#c084fc,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef toolStyle fill:#7c2d12,stroke:#fb923c,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef engineStyle fill:#0f766e,stroke:#2dd4bf,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef outputStyle fill:#14532d,stroke:#4ade80,stroke-width:2px,color:#ffffff,font-weight:bold;
 
-    User(["👨‍🌾 User Input<br/><i>Nepali Voice or Text</i>"]):::user --> API["⚡ FastAPI Request Router<br/><i>STT / Whisper Audio Processing</i>"]
-    API --> Core["🧠 KrishiSahayak Agent Core<br/><i>Llama 3.3 / Qwen 2.5</i>"]
+    User(["👨‍🌾 User Input<br/><i>Nepali Voice or Text</i>"]):::userStyle
+    API["⚡ FastAPI Request Gateway<br/><i>STT / Audio Processing</i>"]:::gatewayStyle
+    Core["🧠 KrishiSahayak Agent Core<br/><i>Llama 3.3 / Qwen 2.5</i>"]:::coreStyle
 
-    subgraph Tool Calling Execution Layer
-        Core -->|"1. Intent & Entity Extraction"| Tool1["🌤️ Tool 1: OpenWeather API<br/><i>Local Micro-Climate Forecast</i>"]:::tools
-        Core -->|"2. JSON Function Call"| Tool2["📊 Tool 2: Kalimati Market API<br/><i>Wholesale Commodity Rates</i>"]:::tools
-        Core -->|"3. Parameter Lookup"| Tool3["📚 Tool 3: Crop Knowledge Base<br/><i>Perishability & Pest Guidelines</i>"]:::tools
+    User --> API
+    API --> Core
+
+    subgraph Tools["🛠️ External Tool Calling Execution Layer"]
+        Tool1["🌤️ Tool 1: OpenWeather API<br/><i>Local Micro-Climate Forecast</i>"]:::toolStyle
+        Tool2["📊 Tool 2: Kalimati Market API<br/><i>Wholesale Commodity Rates</i>"]:::toolStyle
+        Tool3["📚 Tool 3: Crop Knowledge Base<br/><i>Perishability & Pest Rules</i>"]:::toolStyle
     end
 
-    Tool1 -->|"Weather Data"| Engine["⚖️ Multi-Variable Tradeoff Engine<br/><i>Rain Risk vs. Price Trajectory</i>"]
+    Core -->|"1. Intent & Entity Extraction"| Tool1
+    Core -->|"2. JSON Function Execution"| Tool2
+    Core -->|"3. Agriculture Protocol Lookup"| Tool3
+
+    Engine["⚖️ Multi-Variable Tradeoff Engine<br/><i>Rain Risk vs. Price Trajectory</i>"]:::engineStyle
+
+    Tool1 -->|"Forecast Data"| Engine
     Tool2 -->|"Market Trends"| Engine
     Tool3 -->|"Crop Rules"| Engine
 
-    Engine --> Synthesis["🗣️ Natural Language Generator<br/><i>Structured Nepali Text / TTS Audio</i>"]
-    Synthesis --> Output(["📱 Actionable Farmer Output<br/><i>WhatsApp / Web Response</i>"]):::output
+    Output(["📱 Actionable Farmer Output<br/><i>WhatsApp / Web Response (Voice/Text)</i>"]):::outputStyle
+
+    Engine -->|"Synthesized Guidance"| Output
+
+    %% Subgraph Box Styling (Transparent with Dashed Border)
+    style Tools fill:none,stroke:#94a3b8,stroke-width:2px,stroke-dasharray:5 5,color:#cbd5e1
 ```
 
 ---
@@ -86,50 +105,6 @@ pip install -r requirements.txt
 
 👥 Team
 Built by [Your Team Name] for Frogtoberfest 2026 (Leapfrog Technology).
-
-
-
-## 🏗️ Project Architecture & Tool Calling Flow
-
-+-----------------------------------------------------------------------+
-|                    👨‍🌾 User Query (Nepali Voice/Text)                 |
-+-----------------------------------------------------------------------+
-│
-▼
-+-----------------------------------------------------------------------+
-|               ⚡ FastAPI API Gateway & Speech Processing              |
-|                     (Whisper Speech-to-Text)                          |
-+-----------------------------------------------------------------------+
-│
-▼
-+-----------------------------------------------------------------------+
-|             🧠 KrishiSahayak Agent Core (Llama 3.3 / Qwen 2.5)       |
-|            • Intent Classification  • Parameter Extraction           |
-+-----------------------------------------------------------------------+
-│
-┌───────────────────────────┼───────────────────────────┐
-│ (Function Call)           │ (Function Call)           │ (Function Call)
-▼                           ▼                           ▼
-+───────────────────+   +───────────────────+   +───────────────────+
-| 🌤️ Tool 1         |   | 📊 Tool 2         |   | 📚 Tool 3         |
-| OpenWeather API   |   | Kalimati Price    |   | Crop Guidelines   |
-| (Rain/Temp Forecast)|  | (Live Rates/Trends)|  | (Perishability)   |
-+───────────────────+   +───────────────────+   +───────────────────+
-│                           │                           │
-└───────────────────────────┼───────────────────────────┘
-│ (Structured JSON Responses)
-▼
-+-----------------------------------------------------------------------+
-|             ⚖️ Multi-Variable Tradeoff Decision Engine               |
-|            • Weighs Rain Risk vs. Wholesale Price Increase            |
-|            • Generates Optimal Harvest & Selling Window               |
-+-----------------------------------------------------------------------+
-│
-▼
-+-----------------------------------------------------------------------+
-|                 🗣️ Output Generator (Nepali Text / Voice)              |
-|                    (Delivered via Web UI / WhatsApp)                  |
-+-----------------------------------------------------------------------+
 
 📜 License
 Distributed under the MIT License. See LICENSE for more information.
