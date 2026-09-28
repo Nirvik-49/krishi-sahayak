@@ -87,5 +87,49 @@ pip install -r requirements.txt
 👥 Team
 Built by [Your Team Name] for Frogtoberfest 2026 (Leapfrog Technology).
 
+
+
+## 🏗️ Project Architecture & Tool Calling Flow
+
++-----------------------------------------------------------------------+
+|                    👨‍🌾 User Query (Nepali Voice/Text)                 |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|               ⚡ FastAPI API Gateway & Speech Processing              |
+|                     (Whisper Speech-to-Text)                          |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|             🧠 KrishiSahayak Agent Core (Llama 3.3 / Qwen 2.5)       |
+|            • Intent Classification  • Parameter Extraction           |
++-----------------------------------------------------------------------+
+│
+┌───────────────────────────┼───────────────────────────┐
+│ (Function Call)           │ (Function Call)           │ (Function Call)
+▼                           ▼                           ▼
++───────────────────+   +───────────────────+   +───────────────────+
+| 🌤️ Tool 1         |   | 📊 Tool 2         |   | 📚 Tool 3         |
+| OpenWeather API   |   | Kalimati Price    |   | Crop Guidelines   |
+| (Rain/Temp Forecast)|  | (Live Rates/Trends)|  | (Perishability)   |
++───────────────────+   +───────────────────+   +───────────────────+
+│                           │                           │
+└───────────────────────────┼───────────────────────────┘
+│ (Structured JSON Responses)
+▼
++-----------------------------------------------------------------------+
+|             ⚖️ Multi-Variable Tradeoff Decision Engine               |
+|            • Weighs Rain Risk vs. Wholesale Price Increase            |
+|            • Generates Optimal Harvest & Selling Window               |
++-----------------------------------------------------------------------+
+│
+▼
++-----------------------------------------------------------------------+
+|                 🗣️ Output Generator (Nepali Text / Voice)              |
+|                    (Delivered via Web UI / WhatsApp)                  |
++-----------------------------------------------------------------------+
+
 📜 License
 Distributed under the MIT License. See LICENSE for more information.
