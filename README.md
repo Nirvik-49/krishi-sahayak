@@ -102,7 +102,7 @@ pip install -r requirements.txt
 ```
 
 👥 Team
-Built by [Your Team Name] for Frogtoberfest 2026 (Leapfrog Technology).
+Built by Team KrishiSahayak AI for Frogtoberfest 2026 (Leapfrog Technology).
 
 📜 License
 Distributed under the MIT License. See LICENSE for more information.
