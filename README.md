@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 👥 Team
 
-Built by Team KrishiSahayak AI for Frogtoberfest 2026 (Leapfrog Technology).
+Built by KrishiSahayak AI for Frogtoberfest 2026 (Leapfrog Technology).
 
 📜 License
 
