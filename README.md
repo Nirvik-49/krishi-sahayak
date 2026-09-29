@@ -101,10 +101,11 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-👥 Team
+## 👥 Team
 
-Built by KrishiSahayak AI for Frogtoberfest 2026 (Leapfrog Technology).
+* **Solo Builder:** Nirvik K.C. ([Nirvik-49](https://github.com/Nirvik-49))
+* Built for **Frogtoberfest 2026** organized by **Leapfrog Technology**.
 
-📜 License
+## 📜 License
 
 Distributed under the MIT License. See LICENSE for more information.
