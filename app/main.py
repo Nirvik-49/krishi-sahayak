@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from app.core.config import settings
 
 app = FastAPI(
-    title="KrishiSahayak API",
+    title=settings.APP_NAME,
     description="Agricultural decision-support web app for Nepali smallholder farmers",
-    version="0.1.0",
+    version=settings.VERSION,
+    debug=settings.DEBUG,
 )
 
 
@@ -11,7 +13,8 @@ app = FastAPI(
 async def root():
     return {
         "status": "online",
-        "service": "KrishiSahayak Backend",
+        "service": settings.APP_NAME,
+        "version": settings.VERSION,
         "message": "Namaste! कृषि-सहायक API is running."
     }
 
