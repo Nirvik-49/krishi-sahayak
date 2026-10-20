@@ -4,35 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - AI Decision Support</title>
+    <title>{{ title }} - AI Agricultural Decision Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-emerald-50 text-slate-800 min-h-screen">
-    <header class="bg-emerald-700 text-white p-6 shadow-md">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">🌾 KrishiSahayak (कृषि-सहायक)</h1>
-            <span class="text-xs bg-emerald-800 px-3 py-1 rounded-full border border-emerald-500">v0.1.0 MVP</span>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-emerald-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🌾</span>
+                <span class="text-xl font-bold tracking-tight">KrishiSahayak <span
+                        class="text-emerald-400 font-normal text-sm">(कृषि-सहायक)</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-emerald-100">
+                <a href="#services" class="hover:text-white transition">Services</a>
+                <a href="/docs" target="_blank" class="hover:text-white transition">API Docs</a>
+                <a href="https://github.com/Nirvik-49/krishi-sahayak" target="_blank"
+                    class="hover:text-white transition">GitHub Repo</a>
+            </nav>
+            <span class="text-xs bg-emerald-800 text-emerald-200 px-3 py-1 rounded-full border border-emerald-600">Build
+                Phase v0.1.0</span>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto p-6 space-y-6">
-        <!-- Hero Banner -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
-            <h2 class="text-xl font-semibold text-emerald-900 mb-2">Welcome, Nepali Farmer!</h2>
-            <p class="text-slate-600">Get live agricultural weather risks and daily Kalimati market prices to make
-                better harvesting and selling decisions.</p>
+    <!-- Hero Section with Agro-Tech Aesthetic -->
+    <section class="relative bg-emerald-950 text-white overflow-hidden py-16 px-6">
+        <div
+            class="absolute inset-0 opacity-20 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
+        <div class="max-w-6xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span
+                    class="inline-block bg-emerald-800/80 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-700">
+                    🌱 Smart Farming for Nepal
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                    Grow Smarter with <span class="text-emerald-400">AI & Real-Time Data</span>
+                </h1>
+                <p class="text-emerald-100 text-lg leading-relaxed">
+                    Empowering Nepali smallholder farmers with localized weather risk intelligence and live Kalimati
+                    wholesale market rates to maximize yield and profit.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#services"
+                        class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition">
+                        Explore Tools 🚜
+                    </a>
+                    <a href="/docs" target="_blank"
+                        class="bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-700 px-6 py-3 rounded-xl font-semibold transition">
+                        Swagger API ⚡
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating Stats Card Matrix (Inspired by AgroNex/Harvestiq UI kits) -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-emerald-900/60 backdrop-blur-md p-6 rounded-2xl border border-emerald-700/50 shadow-xl">
+                    <div class="text-3xl font-bold text-emerald-400">100%</div>
+                    <div class="text-sm text-emerald-200 mt-1">Live Open-Meteo Data</div>
+                </div>
+                <div class="bg-emerald-900/60 backdrop-blur-md p-6 rounded-2xl border border-emerald-700/50 shadow-xl">
+                    <div class="text-3xl font-bold text-emerald-400">Kalimati</div>
+                    <div class="text-sm text-emerald-200 mt-1">Wholesale Market Rates</div>
+                </div>
+                <div
+                    class="bg-emerald-900/60 backdrop-blur-md p-6 rounded-2xl border border-emerald-700/50 shadow-xl col-span-2">
+                    <div class="text-xl font-bold text-emerald-400">⚡ LLM-Ready Tool Engine</div>
+                    <div class="text-sm text-emerald-200 mt-1">Function calling backend fully integrated for agent
+                        workflows.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Interactive Services Section -->
+    <main id="services" class="max-w-6xl mx-auto px-6 py-16 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+            <h2 class="text-3xl font-bold text-emerald-900">Agricultural Decision Modules</h2>
+            <p class="text-slate-600">Select your region or crop commodity below to test live API endpoints instantly.
+            </p>
         </div>
 
-        <!-- Quick Access Services -->
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-2 gap-8">
             <!-- Weather Card -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
-                <h3 class="text-lg font-semibold text-emerald-800 mb-3">🌤️ Weather Risk Tracker</h3>
-                <form action="/api/v1/weather" method="get" target="_blank" class="space-y-3">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 hover:shadow-md transition">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-emerald-100 text-emerald-700 rounded-xl text-xl">🌤️</div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700">Select Region</label>
-                        <select name="location" class="mt-1 block w-full p-2 border rounded-md border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-900">Weather Risk Tracker</h3>
+                        <p class="text-xs text-slate-500">Powered by Open-Meteo API</p>
+                    </div>
+                </div>
+                <form action="/api/v1/weather" method="get" target="_blank" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Select Farming Hub</label>
+                        <select name="location"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
                             <option value="kathmandu">Kathmandu</option>
                             <option value="pokhara">Pokhara</option>
                             <option value="chitwan">Chitwan</option>
@@ -40,31 +109,54 @@
                         </select>
                     </div>
                     <button type="submit"
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md font-medium transition">Check
-                        Forecast</button>
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium shadow-sm transition">
+                        Get Weather Forecast ➔
+                    </button>
                 </form>
             </div>
 
             <!-- Market Price Card -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
-                <h3 class="text-lg font-semibold text-emerald-800 mb-3">💰 Kalimati Market Price</h3>
-                <form action="/api/v1/market-price" method="get" target="_blank" class="space-y-3">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 hover:shadow-md transition">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-emerald-100 text-emerald-700 rounded-xl text-xl">📈</div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700">Select Commodity</label>
-                        <select name="crop" class="mt-1 block w-full p-2 border rounded-md border-slate-300">
-                            <option value="potato">Potato Red (आलु)</option>
-                            <option value="tomato">Tomato Small (टमाटर)</option>
-                            <option value="onion">Onion Dry (प्याज)</option>
-                            <option value="cauliflower">Cauliflower (काउली)</option>
+                        <h3 class="text-xl font-bold text-slate-900">Kalimati Market Rates</h3>
+                        <p class="text-xs text-slate-500">Wholesale commodity pricing engine</p>
+                    </div>
+                </div>
+                <form action="/api/v1/market-price" method="get" target="_blank" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Select Commodity</label>
+                        <select name="crop"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            <option value="potato">Potato Red (आलु रातो)</option>
+                            <option value="tomato">Tomato Small (टमाटर लहान)</option>
+                            <option value="onion">Onion Dry (प्याज सुकेको)</option>
+                            <option value="cauliflower">Cauliflower Local (काउली)</option>
                         </select>
                     </div>
                     <button type="submit"
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md font-medium transition">Check
-                        Live Rate</button>
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium shadow-sm transition">
+                        Check Wholesale Price ➔
+                    </button>
                 </form>
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div
+            class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0">
+            <div>© 2026 KrishiSahayak. Built for Nepali Farmers & Frogtoberfest.</div>
+            <div class="flex space-x-6">
+                <a href="/docs" target="_blank" class="hover:text-emerald-400 transition">API Docs</a>
+                <a href="https://github.com/Nirvik-49/krishi-sahayak" target="_blank"
+                    class="hover:text-emerald-400 transition">GitHub Repository</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>
