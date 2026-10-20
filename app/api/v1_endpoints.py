@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from app.services.weather import WeatherService
 from app.services.market import MarketService
 from app.services.agent import AgentRouter, TOOLS_SCHEMA
@@ -11,6 +11,10 @@ router = APIRouter(prefix="/api/v1", tags=["Agricultural Services"])
 class ToolCallRequest(BaseModel):
     tool_name: str
     arguments: Dict[str, Any]
+
+
+class AgentQueryRequest(BaseModel):
+    prompt: str
 
 
 @router.get("/weather")
@@ -36,3 +40,10 @@ async def execute_agent_tool(request: ToolCallRequest):
     """Execute tool calls routed from LLM responses."""
     result = await AgentRouter.execute_tool(request.tool_name, request.arguments)
     return {"status": "success", "tool_name": request.tool_name, "output": result}
+
+
+@router.post("/agent/query")
+async def query_agricultural_agent(request: AgentQueryRequest):
+    """Process natural language farming queries using the tool-execution engine."""
+    from app.services.llm_orchestrator import LLMOrchestrator
+    return await LLMOrchestrator.process_query(request.prompt)
