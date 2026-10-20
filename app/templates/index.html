@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - AI Decision Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-emerald-50 text-slate-800 min-h-screen">
+    <header class="bg-emerald-700 text-white p-6 shadow-md">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🌾 KrishiSahayak (कृषि-सहायक)</h1>
+            <span class="text-xs bg-emerald-800 px-3 py-1 rounded-full border border-emerald-500">v0.1.0 MVP</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 space-y-6">
+        <!-- Hero Banner -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
+            <h2 class="text-xl font-semibold text-emerald-900 mb-2">Welcome, Nepali Farmer!</h2>
+            <p class="text-slate-600">Get live agricultural weather risks and daily Kalimati market prices to make
+                better harvesting and selling decisions.</p>
+        </div>
+
+        <!-- Quick Access Services -->
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Weather Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
+                <h3 class="text-lg font-semibold text-emerald-800 mb-3">🌤️ Weather Risk Tracker</h3>
+                <form action="/api/v1/weather" method="get" target="_blank" class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Select Region</label>
+                        <select name="location" class="mt-1 block w-full p-2 border rounded-md border-slate-300">
+                            <option value="kathmandu">Kathmandu</option>
+                            <option value="pokhara">Pokhara</option>
+                            <option value="chitwan">Chitwan</option>
+                            <option value="biratnagar">Biratnagar</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md font-medium transition">Check
+                        Forecast</button>
+                </form>
+            </div>
+
+            <!-- Market Price Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-emerald-100">
+                <h3 class="text-lg font-semibold text-emerald-800 mb-3">💰 Kalimati Market Price</h3>
+                <form action="/api/v1/market-price" method="get" target="_blank" class="space-y-3">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Select Commodity</label>
+                        <select name="crop" class="mt-1 block w-full p-2 border rounded-md border-slate-300">
+                            <option value="potato">Potato Red (आलु)</option>
+                            <option value="tomato">Tomato Small (टमाटर)</option>
+                            <option value="onion">Onion Dry (प्याज)</option>
+                            <option value="cauliflower">Cauliflower (काउली)</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md font-medium transition">Check
+                        Live Rate</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
