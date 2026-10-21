@@ -24,8 +24,9 @@ app.include_router(v1_router)
 async def serve_home(request: Request):
     """Serve home page HTML dashboard."""
     return templates.TemplateResponse(
-        "index.html",
-        {"request": request, "title": settings.APP_NAME}
+        request,             # 1st argument: Request object
+        "index.html",        # 2nd argument: Template file name
+        {"title": settings.APP_NAME}  # 3rd argument: Context dictionary
     )
 
 
