@@ -33,3 +33,13 @@ async def serve_home(request: Request):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+
+@app.get("/chat", response_class=HTMLResponse)
+async def serve_chat(request: Request):
+    """Serve the AI Assistant Chat interface."""
+    return templates.TemplateResponse(
+        request,
+        "chat.html",
+        {"title": settings.APP_NAME}
+    )
