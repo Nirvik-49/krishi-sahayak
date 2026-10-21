@@ -43,3 +43,13 @@ async def serve_chat(request: Request):
         "chat.html",
         {"title": settings.APP_NAME}
     )
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def serve_dashboard(request: Request):
+    """Serve the Analytics Dashboard page."""
+    return templates.TemplateResponse(
+        request,
+        "dashboard.html",
+        {"title": settings.APP_NAME}
+    )

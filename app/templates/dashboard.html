@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Market & Weather Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-emerald-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🌾</span>
+                <a href="/" class="text-xl font-bold tracking-tight">KrishiSahayak <span
+                        class="text-emerald-400 font-normal text-sm">(कृषि-सहायक)</span></a>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-emerald-100">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/chat" class="hover:text-white transition">AI Advisor</a>
+                <a href="/dashboard" class="text-white font-semibold underline">Analytics Dashboard</a>
+                <a href="/docs" target="_blank" class="hover:text-white transition">API Docs</a>
+            </nav>
+            <span class="text-xs bg-emerald-800 text-emerald-200 px-3 py-1 rounded-full border border-emerald-600">Live
+                Analytics</span>
+        </div>
+    </header>
+
+    <!-- Main Analytics Content -->
+    <main class="max-w-6xl w-full mx-auto px-6 py-10 space-y-8 flex-1">
+        <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-6">
+            <div>
+                <h1 class="text-3xl font-extrabold text-emerald-900">Agricultural Market & Weather Hub</h1>
+                <p class="text-slate-600 text-sm mt-1">Real-time agricultural intelligence aggregated from Kalimati
+                    Wholesale Market and Open-Meteo.</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="/chat"
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition">
+                    Ask AI Advisor 💬
+                </a>
+            </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                <div class="text-sm font-medium text-slate-500">Active Market Benchmark</div>
+                <div class="text-2xl font-bold text-emerald-900 mt-2">Kalimati Wholesale</div>
+                <p class="text-xs text-emerald-700 mt-1">Updated daily with standard rates per KG.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                <div class="text-sm font-medium text-slate-500">Weather Engine Status</div>
+                <div class="text-2xl font-bold text-emerald-900 mt-2">🟢 Live Active</div>
+                <p class="text-xs text-emerald-700 mt-1">Open-Meteo REST API connected.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                <div class="text-sm font-medium text-slate-500">LLM Tool Dispatcher</div>
+                <div class="text-2xl font-bold text-emerald-900 mt-2">⚡ Ready</div>
+                <p class="text-xs text-emerald-700 mt-1">Agent function routing operational.</p>
+            </div>
+        </div>
+
+        <!-- Quick Data Lookup Section -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Weather Card -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-4">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                    <span>🌤️</span><span>Regional Weather Forecast</span>
+                </h2>
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700">Select Region</label>
+                    <select id="weather-region"
+                        class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="kathmandu">Kathmandu</option>
+                        <option value="pokhara">Pokhara</option>
+                        <option value="chitwan">Chitwan</option>
+                        <option value="biratnagar">Biratnagar</option>
+                    </select>
+                    <button onclick="fetchWeather()"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium transition shadow-sm">
+                        Fetch Live Forecast Data
+                    </button>
+                </div>
+                <div id="weather-result"
+                    class="hidden bg-slate-50 p-4 rounded-xl text-xs font-mono text-slate-700 overflow-x-auto border border-slate-200">
+                </div>
+            </div>
+
+            <!-- Market Price Card -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-4">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                    <span>📈</span><span>Commodity Rate Inspector</span>
+                </h2>
+                <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700">Select Commodity</label>
+                    <select id="market-crop"
+                        class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="potato">Potato Red (आलु)</option>
+                        <option value="tomato">Tomato Small (टमाटर)</option>
+                        <option value="onion">Onion Dry (प्याज)</option>
+                        <option value="cauliflower">Cauliflower (काउली)</option>
+                    </select>
+                    <button onclick="fetchMarket()"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium transition shadow-sm">
+                        Fetch Wholesale Rate
+                    </button>
+                </div>
+                <div id="market-result"
+                    class="hidden bg-slate-50 p-4 rounded-xl text-xs font-mono text-slate-700 overflow-x-auto border border-slate-200">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-sm">
+        <p>© 2026 KrishiSahayak. Built for Nepali Smallholder Farmers.</p>
+    </footer>
+
+    <!-- Script to query live endpoints interactively -->
+    <script>
+        async function fetchWeather() {
+            const loc = document.getElementById('weather-region').value;
+            const resBox = document.getElementById('weather-result');
+            resBox.classList.remove('hidden');
+            resBox.innerText = "Loading weather data...";
+            try {
+                const res = await fetch(`/api/v1/weather?location=${loc}`);
+                const data = await res.json();
+                resBox.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resBox.innerText = "Error fetching weather data.";
+            }
+        }
+
+        async function fetchMarket() {
+            const crop = document.getElementById('market-crop').value;
+            const resBox = document.getElementById('market-result');
+            resBox.classList.remove('hidden');
+            resBox.innerText = "Loading market prices...";
+            try {
+                const res = await fetch(`/api/v1/market-price?crop=${crop}`);
+                const data = await res.json();
+                resBox.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resBox.innerText = "Error fetching market data.";
+            }
+        }
+    </script>
+</body>
+
+</html>
