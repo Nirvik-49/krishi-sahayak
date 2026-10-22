@@ -114,6 +114,37 @@
                     class="hidden bg-slate-50 p-4 rounded-xl text-xs font-mono text-slate-700 overflow-x-auto border border-slate-200">
                 </div>
             </div>
+
+            <!-- Crop Advisory Recommendation Card -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-4 md:col-span-2">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                    <span>🌾</span><span>AI Crop Health & Action Plan Advisor</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Target Crop</label>
+                        <input type="text" id="rec-crop" value="Potato Red"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Temperature (°C)</label>
+                        <input type="number" id="rec-temp" value="28.5"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Rain Probability (%)</label>
+                        <input type="number" id="rec-rain" value="15"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                    </div>
+                </div>
+                <button onclick="fetchRecommendation()"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-medium transition shadow-sm">
+                    Generate Smart Advisory Plan ➔
+                </button>
+                <div id="rec-result"
+                    class="hidden bg-slate-50 p-4 rounded-xl text-xs font-mono text-slate-700 overflow-x-auto border border-slate-200">
+                </div>
+            </div>
         </div>
     </main>
 
@@ -149,6 +180,22 @@
                 resBox.innerText = JSON.stringify(data, null, 2);
             } catch (err) {
                 resBox.innerText = "Error fetching market data.";
+            }
+        }
+
+        async function fetchRecommendation() {
+            const crop = document.getElementById('rec-crop').value;
+            const temp = document.getElementById('rec-temp').value;
+            const rain = document.getElementById('rec-rain').value;
+            const resBox = document.getElementById('rec-result');
+            resBox.classList.remove('hidden');
+            resBox.innerText = "Analyzing agricultural conditions...";
+            try {
+                const res = await fetch(`/api/v1/recommendation?crop=${encodeURIComponent(crop)}&temperature=${temp}&rain_probability=${rain}`);
+                const data = await res.json();
+                resBox.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                resBox.innerText = "Error generating recommendation plan.";
             }
         }
     </script>

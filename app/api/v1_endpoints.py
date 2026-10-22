@@ -4,6 +4,7 @@ from typing import Dict, Any
 from app.services.weather import WeatherService
 from app.services.market import MarketService
 from app.services.agent import AgentRouter, TOOLS_SCHEMA
+from app.services.recommendation import RecommendationService
 
 router = APIRouter(prefix="/api/v1", tags=["Agricultural Services"])
 
@@ -47,3 +48,15 @@ async def query_agricultural_agent(request: AgentQueryRequest):
     """Process natural language farming queries using the tool-execution engine."""
     from app.services.llm_orchestrator import LLMOrchestrator
     return await LLMOrchestrator.process_query(request.prompt)
+
+
+@router.get("/recommendation")
+async def get_crop_recommendation(
+    crop: str = Query(default="potato", description="Crop name"),
+    temperature: float = Query(
+        default=25.0, description="Current temperature in Celsius"),
+    rain_probability: int = Query(
+        default=10, description="Rain probability percentage")
+):
+    """Generate smart agricultural risk and management advisory."""
+    return RecommendationService.get_advisory(crop, temperature, rain_probability)
