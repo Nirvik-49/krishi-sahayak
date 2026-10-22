@@ -53,3 +53,13 @@ async def serve_dashboard(request: Request):
         "dashboard.html",
         {"title": settings.APP_NAME}
     )
+
+
+@app.get("/about", response_class=HTMLResponse)
+async def serve_about(request: Request):
+    """Serve the About project overview page."""
+    return templates.TemplateResponse(
+        request,
+        "about.html",
+        {"title": settings.APP_NAME}
+    )
