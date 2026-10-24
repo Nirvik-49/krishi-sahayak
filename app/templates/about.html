@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - About KrishiSahayak</title>
+    <title>About - KrishiSahayak</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -20,85 +20,45 @@
             </div>
             <nav class="hidden md:flex space-x-6 text-sm font-medium text-emerald-100">
                 <a href="/" class="hover:text-white transition">Home</a>
-                <a href="/chat" class="hover:text-white transition">AI Advisor</a>
+                <a href="/chat" class="hover:text-white transition">AI Advisor Chat</a>
                 <a href="/dashboard" class="hover:text-white transition">Analytics Dashboard</a>
                 <a href="/about" class="text-white font-semibold underline">About</a>
-                <a href="/docs" target="_blank" class="hover:text-white transition">API Docs</a>
+                <a href="/contact" class="hover:text-white transition">Contact Us</a>
             </nav>
-            <span
-                class="text-xs bg-emerald-800 text-emerald-200 px-3 py-1 rounded-full border border-emerald-600">Project
-                Overview</span>
+            <div class="flex items-center space-x-3">
+                <a href="/login"
+                    class="text-xs bg-emerald-800 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl transition border border-emerald-600 font-medium">Login</a>
+                <a href="/register"
+                    class="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition font-medium shadow-sm">Register</a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-4xl w-full mx-auto px-6 py-12 space-y-10 flex-1">
-        <div class="space-y-4 text-center">
-            <span
-                class="inline-block bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-200">
-                🌱 Empowering Smallholder Farmers
-            </span>
-            <h1 class="text-4xl font-extrabold text-emerald-900 tracking-tight">About KrishiSahayak</h1>
-            <p class="text-slate-600 text-lg max-w-2xl mx-auto">
-                Bridging the gap between real-time agricultural data and Nepali farmers through localized intelligence,
-                weather risk forecasting, and LLM-driven advisories.
+    <main class="max-w-4xl w-full mx-auto px-6 py-12 space-y-8 flex-1">
+        <div class="text-center space-y-3">
+            <h1 class="text-3xl font-extrabold text-emerald-900">About KrishiSahayak</h1>
+            <p class="text-slate-600 text-sm max-w-xl mx-auto">Empowering Nepali smallholder farmers with localized
+                weather risk intelligence and live wholesale market rates[cite: 2].</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-6">
+            <h2 class="text-xl font-bold text-slate-900">Our Mission</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+                Smallholder farmers across rural Nepal frequently face severe post-harvest crop losses and unfair market
+                pricing due to a lack of real-time decision support. Operating without localized weather forecasts or
+                transparent wholesale market price trends (such as Kalimati Market rates), farmers often sell at low
+                rates or suffer crop spoilage during unexpected rain. KrishiSahayak bridges this gap through an
+                open-weight AI agent ecosystem[cite: 2].
             </p>
-        </div>
 
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-3">
-                <div class="text-2xl">🌤️</div>
-                <h3 class="text-xl font-bold text-slate-900">Weather Risk Tracking</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Integrated directly with live meteorological engines (Open-Meteo) to provide multi-day temperature,
-                    wind, and rain probability forecasts across major agricultural hubs like Kathmandu, Pokhara,
-                    Chitwan, and Biratnagar.
-                </p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-3">
-                <div class="text-2xl">📈</div>
-                <h3 class="text-xl font-bold text-slate-900">Kalimati Market Intelligence</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Tracks daily wholesale commodity pricing benchmarks for essential crops like potatoes, tomatoes,
-                    onions, and cauliflowers, helping farmers decide when and where to sell for maximum profit.
-                </p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-3">
-                <div class="text-2xl">⚡</div>
-                <h3 class="text-xl font-bold text-slate-900">LLM Agent Tool Routing</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Powered by a FastAPI backend with structured function-calling routers that automatically translate
-                    natural language farmer questions into precise API queries.
-                </p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-emerald-100 space-y-3">
-                <div class="text-2xl">🛠️</div>
-                <h3 class="text-xl font-bold text-slate-900">Modern Tech Stack</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Built using Python, FastAPI, Uvicorn, Jinja2 templates, Tailwind CSS, and `httpx` for
-                    high-performance asynchronous execution and cross-device responsiveness.
-                </p>
-            </div>
-        </div>
-
-        <!-- Call to Action Banner -->
-        <div
-            class="bg-emerald-900 text-white p-8 rounded-2xl shadow-lg flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="space-y-2 text-center md:text-left">
-                <h2 class="text-2xl font-bold">Ready to test the platform?</h2>
-                <p class="text-emerald-200 text-sm">Explore live interactive tools or chat with our AI advisor right
-                    now.</p>
-            </div>
-            <div class="flex gap-4">
-                <a href="/chat"
-                    class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium text-sm transition shadow-sm">
-                    Open AI Chat 💬
-                </a>
-                <a href="/dashboard"
-                    class="bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-6 py-3 rounded-xl font-medium text-sm transition border border-emerald-700">
-                    View Analytics 📊
-                </a>
-            </div>
+            <h2 class="text-xl font-bold text-slate-900 pt-4">Frogtoberfest 2026 Disclosures</h2>
+            <ul class="list-disc list-inside space-y-2 text-sm text-slate-600">
+                <li><strong>Built For:</strong> Frogtoberfest 2026[cite: 2].</li>
+                <li><strong>Stack:</strong> FastAPI, SQLite, SQLAlchemy, Tailwind CSS, and Pytest.</li>
+                <li><strong>Core Focus:</strong> Actionable crop guidance, live market data, and weather risk tracking.
+                </li>
+            </ul>
         </div>
     </main>
 
