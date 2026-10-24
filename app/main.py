@@ -1,65 +1,93 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request, Form, Depends, status
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.orm import Session
 from app.core.config import settings
-from app.api.v1_endpoints import router as v1_router
+from app.core.database import get_db, User
+from app.services.auth_service import AuthService
+from app.api.v1_endpoints import router as api_router
 
-app = FastAPI(
-    title=settings.APP_NAME,
-    description="Agricultural decision-support web app for Nepali smallholder farmers",
-    version=settings.VERSION,
-    debug=settings.DEBUG,
-)
-
-# Static and Template Setup
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app = FastAPI(title=settings.APP_NAME, version=settings.VERSION)
 templates = Jinja2Templates(directory="app/templates")
 
-# Register API routes
-app.include_router(v1_router)
+app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/", response_class=HTMLResponse)
-async def serve_home(request: Request):
-    """Serve home page HTML dashboard."""
-    return templates.TemplateResponse(
-        request,             # 1st argument: Request object
-        "index.html",        # 2nd argument: Template file name
-        {"title": settings.APP_NAME}  # 3rd argument: Context dictionary
-    )
+async def home(request: Request):
+    return templates.TemplateResponse(request, "index.html", {"title": settings.APP_NAME})
+
+
+@app.get("/chat", response_class=HTMLResponse)
+async def chat(request: Request):
+    return templates.TemplateResponse(request, "chat.html", {"title": settings.APP_NAME})
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard(request: Request):
+    return templates.TemplateResponse(request, "dashboard.html", {"title": settings.APP_NAME})
+
+
+@app.get("/about", response_class=HTMLResponse)
+async def about(request: Request):
+    return templates.TemplateResponse(request, "about.html", {"title": settings.APP_NAME})
+
+
+@app.get("/contact", response_class=HTMLResponse)
+async def contact(request: Request):
+    return templates.TemplateResponse(request, "contact.html", {"title": settings.APP_NAME})
+
+# --- Auth Routes ---
+
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    return templates.TemplateResponse(request, "login.html", {"title": settings.APP_NAME})
+
+
+@app.post("/login", response_class=HTMLResponse)
+async def login_submit(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.email == email).first()
+    if not user or not AuthService.verify_password(password, user.hashed_password):
+        return templates.TemplateResponse(
+            request, "login.html", {
+                "title": settings.APP_NAME, "error": "Invalid email or password"}
+        )
+    return RedirectResponse(url="/dashboard", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+    return templates.TemplateResponse(request, "register.html", {"title": settings.APP_NAME})
+
+
+@app.post("/register", response_class=HTMLResponse)
+async def register_submit(
+    request: Request,
+    full_name: str = Form(...),
+    email: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    existing_user = db.query(User).filter(User.email == email).first()
+    if existing_user:
+        return templates.TemplateResponse(
+            request, "register.html", {
+                "title": settings.APP_NAME, "error": "Email already registered"}
+        )
+    hashed_pwd = AuthService.hash_password(password)
+    new_user = User(full_name=full_name, email=email,
+                    hashed_password=hashed_pwd)
+    db.add(new_user)
+    db.commit()
+    return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
-
-
-@app.get("/chat", response_class=HTMLResponse)
-async def serve_chat(request: Request):
-    """Serve the AI Assistant Chat interface."""
-    return templates.TemplateResponse(
-        request,
-        "chat.html",
-        {"title": settings.APP_NAME}
-    )
-
-
-@app.get("/dashboard", response_class=HTMLResponse)
-async def serve_dashboard(request: Request):
-    """Serve the Analytics Dashboard page."""
-    return templates.TemplateResponse(
-        request,
-        "dashboard.html",
-        {"title": settings.APP_NAME}
-    )
-
-
-@app.get("/about", response_class=HTMLResponse)
-async def serve_about(request: Request):
-    """Serve the About project overview page."""
-    return templates.TemplateResponse(
-        request,
-        "about.html",
-        {"title": settings.APP_NAME}
-    )
