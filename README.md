@@ -16,9 +16,10 @@ Smallholder farmers across rural Nepal frequently face severe post-harvest crop 
 
 In compliance with **Frogtoberfest 2026 Guidelines**:
 
-* **Open-Weight AI Model:** Powered by **Llama-3.3-70B-Instruct** / **Qwen2.5-72B-Instruct** via open inference endpoints (Groq / Together AI). No proprietary APIs (like OpenAI, Claude, or Gemini) are used.
-* **Core AI Function:** The LLM acts as an **autonomous tool-calling router and multi-variable decision engine**. It extracts structured parameters from natural Nepali queries, triggers external API tool calls in parallel (weather + market rates), and evaluates conflicting factors (e.g., rain risk vs. price trajectories) to produce optimal harvest windows.
-* **Litmus Test Compliance:** The AI model is essential to core operations. Without the open-weight LLM, the system cannot interpret unstandardized spoken/typed Nepali, dynamically route tool calls, or synthesize multi-source trade-off logic.
+- **Open-Weight AI Architecture:** Powered by **Llama-3.3-70B-Instruct** / **Qwen2.5-72B-Instruct** via open inference endpoints (Groq / Together AI). No proprietary APIs (like OpenAI, Claude, or Gemini) are used.
+- **Autonomous Tool-Calling Engine:** The LLM acts as an **autonomous tool-calling router and multi-variable decision engine**. It extracts structured parameters from natural Nepali queries, triggers external API tool calls in parallel (weather + market rates), and evaluates conflicting factors (e.g., rain risk vs. price trajectories) to produce optimal harvest windows.
+- **Programmatic Codebase Integration:** The AI intelligence layer is consumed programmatically within `app/api/v1_endpoints.py` (specifically inside the recommendation and agent routing handlers), where structured user parameters and live data are synthesized.
+- **Litmus Test Compliance:** The AI model is essential to core operations. Without the open-weight LLM, the system cannot interpret unstandardized spoken/typed Nepali, dynamically route tool calls, or synthesize multi-source trade-off logic.
 
 ---
 
