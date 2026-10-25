@@ -65,7 +65,8 @@ async def login_submit(
     db: Session = Depends(get_db)
 ):
     user = db.query(User).filter(User.email == email).first()
-    if not user or not AuthService.verify_password(password, user.hashed_password):
+    # Wrapped user.hashed_password with str() to resolve type checker warnings
+    if not user or not AuthService.verify_password(password, str(user.hashed_password)):
         return templates.TemplateResponse(
             request, "login.html", {
                 "title": settings.APP_NAME, "error": "Invalid email or password"}
