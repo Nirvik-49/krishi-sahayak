@@ -6,7 +6,8 @@ from app.services.market import MarketService
 from app.services.agent import AgentRouter, TOOLS_SCHEMA
 from app.services.recommendation import RecommendationService
 
-router = APIRouter(prefix="/api/v1", tags=["Agricultural Services"])
+# Note: Prefix is handled in main.py via include_router to avoid double prefixing (/api/v1/api/v1)
+router = APIRouter(tags=["Agricultural Services"])
 
 
 class ToolCallRequest(BaseModel):
